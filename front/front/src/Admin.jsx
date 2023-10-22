@@ -30,8 +30,8 @@ const [venue , setVenue] = useState("")
   return (
     <>
     <div className="header">
-<h4><Link to='/admin'>Admin</Link></h4>
-<h4><Link to='/search'>Search</Link></h4>
+{/* <h4><Link to='/admin'>Admin</Link></h4>
+<h4><Link to='/search'>Search</Link></h4> */}
 
     </div>
     <div className='main'>

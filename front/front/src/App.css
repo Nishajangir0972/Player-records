@@ -3,34 +3,49 @@
   padding: 0;
 box-sizing: border-box;
 }
-.main{
+div#root {
+  /* background-color: lightblue; */
+  background-image: url(https://image.slidesdocs.com/responsive-images/background/poster-festival-campus-challenge-sports-powerpoint-background_4a4272a403__960_540.jpg);
+  height: 120vh;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  background-position: top;
+  
+}
+.main {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 50px auto;
+  margin:auto;
+  
 }
-.header{
+/* .header{
   display: flex;
 justify-content: center;
 
 
-}
+} */
 
-.form{
-  height: 460px;
-  width: 400px;  border: 2px solid black;
+.form {
+  height: 510px;
+  width: 450px;
+ 
   text-align: center;
-  border-radius: 10px;
-  box-shadow: 2px 2px black;
-  /* align-items: center; */
-  /* display: flex; */
+  align-items: center;
+  border: 2px solid black;
+  margin: auto;
+  margin-top: 40px;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px black;
 }
 a {
   text-decoration: none;
-  color: black;
+  color: rebeccapurple;
   margin-left: 30px;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 26px;
 }
 
 .item {
@@ -39,12 +54,29 @@ a {
   padding: 10px;
 }
 .item label{
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
 }
-.item input{
-  height: 20px;
+.item input {
+  height: 25px;
   width: 190px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px lightslategrey;
+}
+select#age {
+  height: 25px;
+  width: 190px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px lightslategrey;
+}
+select#position {
+  height: 25px;
+  width: 190px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 3px 3px 3px lightslategrey;
 }
 #adds{
   height: 30px;

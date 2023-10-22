@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+
 import axios from 'axios'
 import './search.css'
 
@@ -14,37 +14,42 @@ function Search() {
   const [tournament, setTournament] = useState("")
   const [organised, setOrganised] = useState("")
   const [venue, setVenue] = useState("")
+  const [searchValue , setSearchValue] = useState("")
   const [showData , setshowData] = useState(false)
   const [noData , setnoData] = useState(false)
 
 
-  const searchItem = async (id) => {
-    let result = await axios.get(`http://localhost:8080/form/search/${aadhar}`)
-    // console.log(result)
+  const searchItem = async () => {
+    let result = await axios.get(`http://localhost:8080/form/search/${searchValue}`)
     const response = result.data
-    setSerial(response.serial)
-    setPlayer(response.player)
-    setAadhar(response.aadhar)
-    setGame(response.game)
-    setAge(response.age)
-    setPosition(response.position)
-    setState(response.state)
-    setTournament(response.tournament)
-    setOrganised(response.organised)
-    setVenue(response.venue)
-    setshowData(true)
-    setnoData(false)
-
+    if(response){
+      setSerial(response.serial)
+      setPlayer(response.player)
+      setAadhar(response.aadhar)
+      setGame(response.game)
+      setAge(response.age)
+      setPosition(response.position)
+      setState(response.state)
+      setTournament(response.tournament)
+      setOrganised(response.organised)
+      setVenue(response.venue)
+      setshowData(true)
+      setnoData(false)
+      
+    }else{
+      setshowData(false)
+      setnoData(true)
+    }
   }
 
 
   return (
     <>
-      <Link to='/admin'>Admin</Link>
+      
 
       <div className="head">
         <div className='search'>
-          <input type="number" placeholder='Enter Aadhar No.' value={aadhar} onChange={(e) => { setAadhar(e.target.value) }} />
+          <input type="number" placeholder='Enter Aadhar No.' value={searchValue} onChange={(e) => { setSearchValue(e.target.value) }} />
           <button id='searchbtn' onClick={(e) => {
             e.preventDefault();
             searchItem()
@@ -63,7 +68,7 @@ function Search() {
     </div>
     <div className="item">
       <label htmlFor="Aadhar">Aadhar No.</label>
-      <input type="number" value={aadhar} />
+      <input type="text" value={aadhar} />
     </div>
     <div className="item">
       <label htmlFor="Game">Game</label>
@@ -99,7 +104,7 @@ function Search() {
 }
 {
   noData && (
-    <h1>No Data Available</h1>
+    <h3>No DAta........</h3>
   )
 }
          
