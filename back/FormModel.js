@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const FormSchema = new mongoose.Schema({
-    serial: String,
+    srno: String,
     player: String,
     aadhar: Number,
     game: String,

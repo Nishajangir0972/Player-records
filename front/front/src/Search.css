@@ -60,3 +60,11 @@
     margin-top: 30px;
     border-radius: 10px;
 }
+.item button {
+    height: 30px;
+    width: 129px;
+    border: none;
+    border-radius: 22px;
+    background-color: slategrey;
+    color: white;
+}

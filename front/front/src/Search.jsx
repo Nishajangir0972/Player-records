@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-
+import React, { useState , useRef } from 'react'
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
 import axios from 'axios'
 import './search.css'
 
 function Search() {
-  const [serial, setSerial] = useState("")
+  const [srno, setSerial] = useState("")
   const [player, setPlayer] = useState("")
   const [aadhar, setAadhar] = useState("")
   const [game, setGame] = useState("")
@@ -23,7 +24,7 @@ function Search() {
     let result = await axios.get(`http://localhost:8080/form/search/${searchValue}`)
     const response = result.data
     if(response){
-      setSerial(response.serial)
+      setSerial(response.srno)
       setPlayer(response.player)
       setAadhar(response.aadhar)
       setGame(response.game)
@@ -43,6 +44,25 @@ function Search() {
   }
 
 
+  const formContainerRef = useRef(null);
+  const Generatepdf = () => {
+    const formContainer = formContainerRef.current;
+    html2canvas(formContainer)
+      .then((canvas) => {
+        html2canvas(formContainer).then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF('l', 'mm', 'a4');
+
+          const pageWidth = pdf.internal.pageSize.width - 20;
+          const pageHeight = pdf.internal.pageSize.height - 20;
+
+          pdf.addImage(imgData, 'PNG', 10, 10, pageWidth, pageHeight);
+          pdf.save('form.pdf');
+        });
+      })
+  }
+
+
   return (
     <>
       
@@ -57,10 +77,10 @@ function Search() {
         </div>
 {
   showData && (
-    <div className="form">
+    <div className="form"  ref={formContainerRef}>
     <div className="item">
       <label htmlFor="serialno">Serial No</label>
-      <input type="text" value={serial} />
+      <input type="text" value={srno} />
     </div>
     <div className="item">
       <label htmlFor="Player">Player Name</label>
@@ -97,6 +117,12 @@ function Search() {
     <div className="item">
       <label htmlFor="venue">Venue</label>
       <input type="text" id='venue' value={venue} />
+    </div>
+    <div className="item">
+    <label htmlFor="action">Action</label>
+<button onClick={(e)=>{e.preventDefault();
+Generatepdf()
+}}>Download Pdf</button>
     </div>
 
   </div>

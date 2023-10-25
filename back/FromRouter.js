@@ -10,8 +10,21 @@ const FormRouter = express.Router();
 
 FormRouter.post("/add" , async(req,res)=>{
     const formToAdd = new FormModel(req.body)
-    let result = await formToAdd.save()
-    res.json(result)
+    let result = await FormModel.find()
+    if(result.length == 0){
+        formToAdd.srno += `001`
+    console.log(result)
+
+    }
+    else{
+        let lastpart = ++result[result.length - 1].srno.split("/")[3];
+        lastpart = String(lastpart).padStart(3,"0")
+        formToAdd.srno += `${lastpart}`
+
+    }
+
+    let records = await formToAdd.save()
+    res.json(records)
 })
 
 FormRouter.get('/search/:id' , async(req, res) =>{
